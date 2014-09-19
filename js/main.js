@@ -1,17 +1,22 @@
 window.onload = function() {
-	var fb = new Firebase("https://flickering-inferno-1483.firebaseio.com/");
+	var fb = new Firebase('https://flickering-inferno-1483.firebaseio.com/');
 
-	var submit = document.getElementById("submit");
-	var textbox = document.getElementById("message");
+	var submit = document.getElementById('submit');
+	var textbox = document.getElementById('message');
 	
-	fb.data("stored-messages");
+	var posts = fb.child('posts');
 
-	fb.limit(10).on('value', function(snapshot) {
-		var data = snapshot.val();
-		console.log(snapshot.storedMessages);
-	});
+	submit.onclick = addPost;
 
-	submit.onclick = function() {
-		fb.push( {storedMessages: textbox.value} );
+	function addPost() {
+		posts.push({
+			content: textbox.value,
+			date: new Date().toLocaleDateString('en-US')
+		});
 	}
+
+	posts.on('child_added', function(data) {
+		var post = data.val();
+		console.log(post);
+	})
 }
