@@ -15,7 +15,7 @@ window.onload = function() {
 		});
 	}
 
-	posts.once('child_added', function(data) {
+	posts.on('child_added', function(data) {
 		var postData = data.val();
 		var post = document.createElement('div');
 		var postContent = document.createTextNode(postData.content);
