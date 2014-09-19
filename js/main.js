@@ -4,18 +4,18 @@ window.onload = function() {
 	var submit = document.getElementById('submit');
 	var textbox = document.getElementById('message');
 	
-	var posts = fb.child('posts');
+	var postsRef = fb.child('posts');
 
 	submit.onclick = addPost;
 
 	function addPost() {
-		posts.push({
+		postsRef.push({
 			content: textbox.value,
 			date: new Date().toLocaleDateString('en-US')
 		});
 	}
 
-	posts.on('child_added', function(data) {
+	postsRef.on('child_added', function(data) {
 		var postData = data.val();
 		var post = document.createElement('div');
 		var postContent = document.createTextNode(postData.content);
@@ -26,6 +26,7 @@ window.onload = function() {
 		date.appendChild(dateContent);
 		post.appendChild(date);
 
-		document.body.insertBefore(post, this);
+		var posts = document.getElementById('messages');
+		posts.insertBefore(post, posts.firstChild);
 	});
 }
