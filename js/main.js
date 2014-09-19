@@ -15,8 +15,17 @@ window.onload = function() {
 		});
 	}
 
-	posts.on('child_added', function(data) {
-		var post = data.val();
-		console.log(post);
-	})
+	posts.once('child_added', function(data) {
+		var postData = data.val();
+		var post = document.createElement('div');
+		var postContent = document.createTextNode(postData.content);
+		post.appendChild(postContent);
+		
+		var date = document.createElement('div');
+		var dateContent = document.createTextNode(postData.date);
+		date.appendChild(dateContent);
+		post.appendChild(date);
+
+		document.body.insertBefore(post, this);
+	});
 }
