@@ -1,4 +1,4 @@
-window.onload = function() {
+$(document).ready(function() {
 	var fb = new Firebase('https://flickering-inferno-1483.firebaseio.com/');	
 	var postsRef = fb.child('posts');
 
@@ -16,4 +16,4 @@ window.onload = function() {
 		$("#messages").prepend("<div>"+date+"</div>");		
 		$("#messages").prepend("<div>"+content+"</div>");		
 	});
-}
+});
