@@ -13,7 +13,7 @@ window.onload = function() {
 		var postData = data.val();
 		var content = postData.content;
 		var date = postData.date;
-		$("#messages").prepend("<div>"+content+"</div>");	
 		$("#messages").prepend("<div>"+date+"</div>");
+		$("#messages").prepend("<div>"+content+"</div>");	
 	});
 }
